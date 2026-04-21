@@ -25,5 +25,11 @@ docker compose down
 # Check Cloudflare Tunnel Public URL
 docker logs capsulehouse_tunnel
 
+# Install Frontend Dependencies
+# cd frontend && npm install framer-motion lucide-react axios
+
+# Install Backend Dependencies
+# cd backend && go get github.com/gin-contrib/cors github.com/google/uuid
+
 # Current Public URL (Note: changes if containers are restarted)
 # https://occupation-menu-weight-school.trycloudflare.com

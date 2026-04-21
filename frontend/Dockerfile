@@ -42,8 +42,8 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-# Note: we don't have a public folder yet, but if we do, we should copy it
-# COPY --from=builder /app/public ./public
+# Copy public folder for images
+COPY --from=builder /app/public ./public
 
 USER nextjs
 
