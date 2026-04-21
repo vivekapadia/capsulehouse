@@ -1,0 +1,38 @@
+This plan outlines the digital strategy to establish a high-end online presence for your capsule house manufacturing business, moving from a local development environment to a robust in-house hosting setup.
+1. Website Development Plan
+To offer a "Basic to Luxury" user experience, the website will act as a virtual showroom.
+Product Tiering: Create dedicated landing pages for different lines:
+Basic: Focus on affordability, utility, and quick setup (Apple Cabins).
+Luxury: Focus on smart tech, panoramic views, and premium finishes (Space Capsules).
+3D Configurator: An interactive tool where users can select "Basic" or "Luxury" finishes, seeing real-time price updates in INR.
+Virtual Tours: Integration of 360° videos or Matterport tours to give a "luxury" sense of space.
+Lead Generation: High-intent forms for "Request a Quote" and "Download Technical Specifications."
+2. Technical Stack Implementation
+Your chosen stack is high-performance and scalable for a Pan-India rollout.
+Frontend (Next.js):
+SSR/SSG: Use Static Site Generation for fast-loading product pages to improve SEO.
+UI Library: Use Tailwind CSS or Framer Motion for "luxury" animations and smooth transitions.
+Backend (Go/Golang):
+Speed: Go’s concurrency handles high traffic during marketing campaigns effortlessly.
+API: RESTful or GraphQL API to serve product data and handle lead captures.
+Database & ORM (Postgres + GORM):
+Postgres (Dockerized): Ensures a consistent environment from your local machine to the in-house server.
+GORM: Simplifies complex queries for filtering houses by size (sq. ft./Gaj) and price tier.
+3. Hosting & Infrastructure (Local to In-House)
+Since your objective is in-house hosting, the transition follows these steps:
+Phase 1: Local Development: Running the entire stack (Go, Postgres, Next.js) via Docker Compose on local workstations.
+Phase 2: In-House Server Setup:
+Deploy a dedicated Linux server (e.g., Ubuntu Server).
+Reverse Proxy: Use Nginx or Traefik to handle SSL certificates (HTTPS) and route traffic to your Docker containers.
+Phase 3: Public Access:
+Set up a Static IP with your ISP.
+Configure Port Forwarding and Firewall (UFW) to safely expose the Next.js frontend to the internet.
+4. Manufacturing & Operations Integration
+The website should reflect your manufacturing strengths:
+Inventory Tracking: Use the Go backend to sync with your factory’s production schedule.
+Transparency: A "Track My Build" feature for customers to see their capsule house moving through the manufacturing stages.
+Logistics Module: A calculator to estimate transportation costs from your hub to the customer's specific location in India.
+5. Content Strategy (Referencing Hitechnest Style)
+Portfolio: High-resolution galleries of completed projects across India (e.g., resorts in Goa vs. cottages in Manali).
+Technical Specs: Clear tables showing dimensions in Sq. Ft. and Gaj, material grades, and earthquake/wind resistance ratings.
+Trust Signals: Prominently display ISO certifications and "Make in India" credentials.
