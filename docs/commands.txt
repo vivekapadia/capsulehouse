@@ -15,3 +15,15 @@ go run main.go
 # Run Frontend
 cd frontend
 npm run dev
+
+# Run Full Docker Stack (DB, Backend, Frontend, Cloudflare Tunnel)
+docker compose up -d --build
+
+# Stop Full Docker Stack
+docker compose down
+
+# Check Cloudflare Tunnel Public URL
+docker logs capsulehouse_tunnel
+
+# Current Public URL (Note: changes if containers are restarted)
+# https://occupation-menu-weight-school.trycloudflare.com
