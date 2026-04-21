@@ -1,0 +1,17 @@
+# Commands Executed
+
+node -v
+npm -v
+go version
+docker --version
+
+# Run Database
+docker compose up -d db
+
+# Run Backend
+cd backend
+go run main.go
+
+# Run Frontend
+cd frontend
+npm run dev
