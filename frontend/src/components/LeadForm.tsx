@@ -8,11 +8,15 @@ export default function LeadForm({ selectedModel, onSuccess }: { selectedModel: 
     name: "",
     phone: "",
     location: "",
-    interested_model: selectedModel || "",
+    interested_model: selectedModel,
     additional_message: "",
   });
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }; 
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("submitting");
@@ -46,8 +50,9 @@ export default function LeadForm({ selectedModel, onSuccess }: { selectedModel: 
         <input 
           required
           type="text" 
+          name="name"
           value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
+          onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all"
           placeholder="John Doe"
         />
@@ -57,8 +62,9 @@ export default function LeadForm({ selectedModel, onSuccess }: { selectedModel: 
         <input 
           required
           type="tel" 
+          name="phone"
           value={formData.phone}
-          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+          onChange={handleChange}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all"
           placeholder="+91 98765 43210"
         />
@@ -68,6 +74,7 @@ export default function LeadForm({ selectedModel, onSuccess }: { selectedModel: 
         <input 
           required
           type="text" 
+          name="location"
           value={formData.location}
           onChange={(e) => setFormData({...formData, location: e.target.value})}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-all"

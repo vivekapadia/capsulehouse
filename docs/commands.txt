@@ -33,3 +33,49 @@ docker logs capsulehouse_tunnel
 
 # Current Public URL (Note: changes if containers are restarted)
 # https://occupation-menu-weight-school.trycloudflare.com
+
+# Install 3D Frontend Dependencies
+# cd frontend && npm install three @types/three @react-three/fiber @react-three/drei
+
+# ─────────────────────────────────────────────────────────────────
+# SESSION: 2026-04-22 — Enterprise Glassmorphism & Catalog Upgrade
+# ─────────────────────────────────────────────────────────────────
+
+# Rebuild only the backend service
+docker compose up -d --build backend
+
+# Rebuild only the frontend service
+docker compose up -d --build frontend
+
+# Rebuild both backend and frontend (without DB)
+docker compose up -d --build backend frontend
+
+# Rebuild the full stack (all services)
+docker compose up -d --build
+
+# Check backend API — list all products
+Invoke-RestMethod -Uri "http://localhost:8080/api/products" -Method Get
+
+# Check backend API — list all leads
+Invoke-RestMethod -Uri "http://localhost:8080/api/leads" -Method Get
+
+# Create a test lead via PowerShell (Windows)
+$body = @{
+    name = "John Doe"
+    phone = "9876543210"
+    location = "Mumbai"
+    interested_model = "Zenith X1 Capsule"
+    additional_message = "Testing the admin portal."
+} | ConvertTo-Json
+Invoke-RestMethod -Uri "http://localhost:8080/api/leads" -Method Post -Body $body -ContentType "application/json"
+
+# View live container logs (useful for debugging)
+docker logs capsulehouse_backend --tail 50
+docker logs capsulehouse_frontend --tail 50
+
+# Check running container status
+docker compose ps
+
+# Admin Portal
+# URL:      /admin
+# Password: admin123

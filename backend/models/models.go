@@ -38,3 +38,13 @@ type Lead struct {
 	InterestedModel   string `json:"interested_model"`
 	AdditionalMessage string `json:"additional_message"`
 }
+
+// Portfolio represents a completed project showcase
+type Portfolio struct {
+	BaseModel
+	Title       string `json:"title"`
+	Location    string `json:"location"`
+	Description string `json:"description"`
+	ImageURL    string `json:"image_url"`
+	Units       int    `json:"units"`
+}
