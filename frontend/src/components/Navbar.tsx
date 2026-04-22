@@ -35,9 +35,10 @@ export default function Navbar() {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-10">
-          <Link href="/products" className="text-sm font-bold text-gray-600 hover:text-blue-600 transition-colors">Products</Link>
-          <Link href="/portfolio" className="text-sm font-bold text-gray-600 hover:text-blue-600 transition-colors">Portfolio</Link>
-          <Link href="/configurator" className="flex items-center gap-2 text-sm font-bold text-blue-600 hover:opacity-80 transition-all">
+          <Link href="/products" className="text-sm font-bold text-gray-600 hover:text-blue-600 transition-colors outline-none border-none">Products</Link>
+          <Link href="/portfolio" className="text-sm font-bold text-gray-600 hover:text-blue-600 transition-colors outline-none border-none">Portfolio</Link>
+          <Link href="/compare" className="text-sm font-bold text-gray-600 hover:text-blue-600 transition-colors outline-none border-none">Compare</Link>
+          <Link href="/configurator" className="flex items-center gap-2 text-sm font-bold text-blue-600 hover:opacity-80 transition-all outline-none border-none">
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse"></span>
             3D Studio
           </Link>

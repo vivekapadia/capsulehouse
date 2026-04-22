@@ -12,84 +12,121 @@ const Capsule3D = dynamic(() => import("@/components/Capsule3D"), {
 });
 
 const materials = [
-  { id: "arctic", name: "Arctic Frost", color: "#f8f9fa", price: 850000 },
-  { id: "stealth", name: "Midnight Stealth", color: "#121212", price: 920000 },
-  { id: "chrome", name: "Lunar Chrome", color: "#6c757d", price: 980000 },
-  { id: "gold", name: "Desert Gold", color: "#c5a059", price: 1150000 },
-  { id: "emerald", name: "Emerald Eco", color: "#1a3a3a", price: 1050000 },
+  { id: "arctic", name: "Arctic Frost", color: "#f8f9fa", price: 850000, perf: "95% Thermal Reflective" },
+  { id: "stealth", name: "Midnight Stealth", color: "#121212", price: 920000, perf: "Anti-Corrosive Armor" },
+  { id: "chrome", name: "Lunar Chrome", color: "#6c757d", price: 980000, perf: "Aerospace Grade Finish" },
+  { id: "gold", name: "Desert Gold", color: "#c5a059", price: 1150000, perf: "UV-Resistant Shield" },
+  { id: "emerald", name: "Emerald Eco", color: "#1a3a3a", price: 1050000, perf: "Nature-Integrated Coat" },
 ];
 
 export default function ConfiguratorPage() {
   const [selectedMaterial, setSelectedMaterial] = useState(materials[0]);
+  const [smartPack, setSmartPack] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [autoRotate, setAutoRotate] = useState(false);
+
+  const totalPrice = selectedMaterial.price + (smartPack ? 150000 : 0);
+
+  const shareToWhatsApp = () => {
+    const msg = `Hi! I've designed a Capsule House with ${selectedMaterial.name} finish ${smartPack ? "and the Smart-Tech Package" : ""}. Total Estimate: ₹${(totalPrice / 100000).toFixed(2)}L. Can we discuss?`;
+    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(msg)}`, "_blank");
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 pt-28 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-12">
-          <h1 className="text-4xl font-black text-gray-900 mb-2">3D Design Studio</h1>
-          <p className="text-gray-500 font-medium tracking-tight">Enterprise-grade capsule visualization in real-time.</p>
+        <div className="mb-12 flex justify-between items-end">
+          <div>
+            <h1 className="text-5xl font-black text-gray-900 mb-2">Design Studio</h1>
+            <p className="text-gray-500 font-medium tracking-tight">Configure your architectural masterpiece.</p>
+          </div>
+          <button 
+            onClick={shareToWhatsApp}
+            className="flex items-center gap-3 glass px-6 py-3 rounded-2xl text-sm font-black text-green-600 hover:bg-green-50 transition-all border-green-100"
+          >
+            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+            Share to WhatsApp
+          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
           {/* 3D Viewer Area */}
-          <div className="lg:col-span-2 glass rounded-[3rem] h-[600px] relative overflow-hidden group border-white/20">
+          <div className="lg:col-span-2 glass rounded-[3rem] h-[650px] relative overflow-hidden group border-white/20 shadow-inner">
             <div className="absolute top-8 left-8 z-20 flex gap-3">
               <button 
                 onClick={() => setAutoRotate(!autoRotate)}
-                className={`px-5 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all ${
-                  autoRotate ? "bg-blue-600 text-white shadow-lg" : "glass text-gray-800 hover:bg-white"
+                className={`px-6 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all ${
+                  autoRotate ? "bg-blue-600 text-white shadow-xl" : "glass text-gray-800 hover:bg-white"
                 }`}
               >
-                {autoRotate ? "● Auto-Rotate On" : "Auto-Rotate Off"}
+                {autoRotate ? "● Orbiting" : "Static View"}
               </button>
-              <div className="glass-dark px-5 py-2.5 rounded-full text-xs font-black text-gray-800 uppercase tracking-widest flex items-center gap-2">
+              <div className="glass-dark px-6 py-3 rounded-full text-[10px] font-black text-gray-800 uppercase tracking-[0.2em] flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                4K Rendering
+                Raytraced Output
               </div>
             </div>
             <Capsule3D color={selectedMaterial.color} autoRotate={autoRotate} />
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 glass-dark px-8 py-3 rounded-full text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-              Drag to Rotate • Scroll to Zoom
+            <div className="absolute bottom-8 left-8 glass px-6 py-4 rounded-3xl border-white/40">
+                <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Active Shell</p>
+                <p className="text-sm font-black text-gray-900">{selectedMaterial.name}</p>
             </div>
           </div>
 
           {/* Configuration Panel */}
-          <div className="glass rounded-[3rem] p-10 space-y-10">
+          <div className="glass rounded-[3rem] p-10 space-y-10 border-white/20">
             <div>
-              <h3 className="text-lg font-black text-gray-900 mb-6 uppercase tracking-wider">Exterior Finish</h3>
+              <h3 className="text-xs font-black text-gray-400 mb-6 uppercase tracking-[0.2em]">Exterior Performance</h3>
               
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {materials.map((mat) => (
                   <button
                     key={mat.id}
                     onClick={() => setSelectedMaterial(mat)}
-                    className={`w-full flex items-center gap-4 p-5 rounded-2xl transition-all border-2 ${
+                    className={`w-full flex items-center gap-4 p-5 rounded-3xl transition-all border-2 ${
                       selectedMaterial.id === mat.id 
-                      ? "border-blue-600 bg-blue-50/50 shadow-md scale-[1.02]" 
-                      : "border-transparent bg-white/50 hover:bg-white"
+                      ? "border-blue-600 bg-blue-50/50 shadow-lg scale-[1.02]" 
+                      : "border-transparent bg-white/40 hover:bg-white"
                     }`}
                   >
-                    <div className="w-10 h-10 rounded-full border border-gray-100 shadow-inner" style={{ backgroundColor: mat.color }}></div>
-                    <span className="font-bold text-gray-800">{mat.name}</span>
+                    <div className="w-12 h-12 rounded-full border-4 border-white shadow-xl" style={{ backgroundColor: mat.color }}></div>
+                    <div className="text-left">
+                        <p className="font-black text-gray-900 text-sm">{mat.name}</p>
+                        <p className="text-[10px] font-bold text-blue-600/70 uppercase tracking-tighter">{mat.perf}</p>
+                    </div>
                   </button>
                 ))}
               </div>
             </div>
 
+            <div className="p-8 bg-indigo-50/50 rounded-[2rem] border border-indigo-100">
+                <div className="flex justify-between items-center mb-4">
+                    <div>
+                        <h4 className="text-sm font-black text-indigo-900">Smart-Tech Pack</h4>
+                        <p className="text-[10px] font-bold text-indigo-600 uppercase">IoT • Voice • Automation</p>
+                    </div>
+                    <button 
+                        onClick={() => setSmartPack(!smartPack)}
+                        className={`w-14 h-8 rounded-full transition-all relative ${smartPack ? "bg-indigo-600" : "bg-gray-200"}`}
+                    >
+                        <div className={`absolute top-1 w-6 h-6 rounded-full bg-white transition-all ${smartPack ? "left-7" : "left-1"}`}></div>
+                    </button>
+                </div>
+                <p className="text-[11px] text-indigo-800/70 leading-relaxed font-medium">Adds automated curtains, voice-controlled lighting, and smart thermal management.</p>
+            </div>
+
             <div className="pt-6 border-t border-gray-100">
-              <p className="text-sm text-gray-500 mb-1">Estimated Total</p>
-              <h3 className="text-4xl font-extrabold text-blue-600 mb-8">
-                ₹{(selectedMaterial.price / 100000).toFixed(2)} <span className="text-lg text-gray-500 font-medium">Lakhs</span>
+              <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Project Estimate</p>
+              <h3 className="text-5xl font-black text-blue-600 mb-8 tracking-tighter">
+                ₹{(totalPrice / 100000).toFixed(2)} <span className="text-lg text-gray-400 font-bold">Lakhs</span>
               </h3>
 
               <button 
                 onClick={() => setShowForm(true)}
-                className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="w-full bg-gray-900 text-white font-black py-5 rounded-2xl hover:bg-black transition-all shadow-2xl hover:scale-[1.02] active:scale-95 uppercase tracking-widest text-xs"
               >
-                Request Quote
+                Finalize Configuration
               </button>
             </div>
           </div>

@@ -20,13 +20,14 @@ type BaseModel struct {
 // Product represents a capsule house model
 type Product struct {
 	BaseModel
-	Name        string  `json:"name"`
-	Category    string  `json:"category"`
-	Description string  `json:"description"`
-	PriceINR    float64 `json:"price_inr"`
-	Dimensions  string  `json:"dimensions"`
-	Features    string  `json:"features"`
-	ImageURL    string  `json:"image_url"`
+	Name           string  `json:"name"`
+	Category       string  `json:"category"`
+	Description    string  `json:"description"`
+	PriceINR       float64 `json:"price"`
+	Dimensions     string  `json:"dimensions"`
+	Features       string  `json:"features"`
+	Specifications string  `json:"specifications"`
+	ImageURL       string  `json:"image_url"`
 }
 
 // Lead represents a potential customer inquiry
